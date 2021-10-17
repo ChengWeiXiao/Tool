@@ -1,16 +1,20 @@
 <html>
-   
 
 <head>
+    <meta charset="utf-8">
+    <meta property="og:title" content="加碼券查詢工具" />
+    <meta property="og:image" content="https://5000.gov.tw/inc/img/LOGO.png" />
+    <meta property="og:description" content="提供民眾，查詢加碼券" />
     <title>加碼券查詢工具</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/controller.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto col-5">
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto col-12">
         <div class="card card0 border-0">
             <div class="bg-blue px-4 py-4">
                 <span>
@@ -24,8 +28,8 @@
                             <label class="mb-1">
                                 <h6 class="mb-0 text-xl" style="font-weight: bold;padding-bottom: 0.5em;">身分證末三碼</h6>
                             </label>
-                            <input class="mb-4" type="text" id="identityNumber" placeholder="請輸入身分證末三碼" maxlength="3"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <input class="mb-4" type="text" id="identityNumber" placeholder="請輸入身分證末三碼" maxlength="99999"
+                                oninput="this.value = this.value.replace(/[^0-9.,]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                         <div class="row mb-3 px-3">
                             <button type="button" class="btn col-3" id="searchBtn"
@@ -42,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 mx-auto col-5">
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 mx-auto col-12">
         <div class="row d-flex">
             <div class="col-lg-12">
                 <h1 id='winning' style="display: none;color:#04a776;font-weight: bold;">
@@ -53,91 +57,33 @@
                 </h1>
             </div>
         </div>
-        <div id='result'>
+        <div id='week1' style="display: none;">
+            <h5 style="color:#1a1a1a;font-weight: bold;">第一週</h5>
+        </div>
+        <div id='week1Result'>
+
+        </div>
+        <div id='week2' style="display: none;">
+            <h5 style="color:#1a1a1a;font-weight: bold;">第二週</h5>
+        </div>
+        <div id='week2Result'>
+
+        </div>
+        <div id='week3' style="display: none;">
+            <h5 style="color:#1a1a1a;font-weight: bold;">第三週</h5>
+        </div>
+        <div id='week3Result'>
+
+        </div>
+        <div id='week4' style="display: none;">
+            <h5 style="color:#1a1a1a;font-weight: bold;">第四週</h5>
+        </div>
+        <div id='week4Result'>
 
         </div>
     </div>
 </body>
-<script type="text/javascript">
-    var winNo1 = [{
-        name: '國旅券',
-        number: ['21', '32', '98', '67', '97', '410']
-    }, {
-        name: 'i原券',
-        number: ['64', '85']
-    }, {
-        name: '農遊券',
-        number: ['89', '32', '54', '597', '453', '152']
-    }, {
-        name: '藝FUN券(數位)',
-        number: ['96', '15', '07', '30', '73', '98', '19', '11']
-    }, {
-        name: '藝FUN券(紙本)',
-        number: ['39', '37', '23', '36', '79', '08', '14', '75']
-    }, {
-        name: '動滋券',
-        number: ['97', '13', '19', '55', '71', '93', '381', '734', '644', '453', '985']
-    }, {
-        name: '客庄券',
-        number: ['81', '900']
-    }, {
-        name: '地方創生券',
-        number: ['081', '105', '594', '188', '089', '396', '521', '467', '912', '798', '358', '441', '367',
-            '941', '335'
-        ]
-    }];
-
-    var winNo2 = {}
-
-    var winNo3 = {}
-
-    var winNo4 = {}
-
-    function search() {
-        initial();
-        var identityNumber = document.getElementById("identityNumber").value;
-        if (identityNumber == null || identityNumber == undefined || identityNumber == '') {
-            swal({
-                title: "提醒",
-                text: "請填入身分證末三碼",
-                icon: "warning",
-                button: "關閉",
-            });
-            return;
-        }
-        var count = 0;
-        let result = document.getElementById('result');
-        result.innerHTML = '';
-        winNo1.forEach(element => {
-            if (element.number.find(element => element == identityNumber.slice(-(element.length)))) {
-                let span = document.createElement('span');
-                span.appendChild(document.createTextNode('券別:' + element.name));
-                result.appendChild(span);
-                result.appendChild(document.createElement('hr'));
-                count++;
-            }
-        });
-        if (count > 0) {
-            document.getElementById("winning").style.display = 'block';
-
-        } else {
-            document.getElementById("noWinning").style.display = 'block';
-
-        }
-    }
-
-    function removeValue() {
-        document.getElementById("identityNumber").value = '';
-        initial();
-    }
-
-    function initial() {
-        document.getElementById("winning").style.display = 'none';
-        document.getElementById("noWinning").style.display = 'none';
-        let result = document.getElementById('result');
-        result.innerHTML = '';
-    }
-
+<script>
     // Get the input field
     var input = document.getElementById("identityNumber");
 

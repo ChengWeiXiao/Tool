@@ -44,7 +44,7 @@
         initial();
         var identityNumber = document.getElementById("identityNumber").value;
         if (identityNumber == null || identityNumber == undefined || identityNumber == '') {
-            document.getElementById('invalid').style.display='block';
+            document.getElementById('invalid').style.display = 'block';
             return;
         }
 
@@ -246,18 +246,21 @@
                 week4Result.appendChild(document.createElement('hr'));
             });
         }
-
-        if (week1Count > 0) {
-            document.getElementById("week1").style.display = 'block';
+        document.getElementById("week1").style.display = 'block';
+        document.getElementById("week2").style.display = 'block';
+        document.getElementById("week3").style.display = 'block';
+        document.getElementById("week4").style.display = 'block';
+        if (winNo1.length == 0) {
+            document.getElementById("week1NotYet").style.display = 'block';
         }
-        if (week2Count > 0) {
-            document.getElementById("week2").style.display = 'block';
+        if (winNo2.length == 0) {
+            document.getElementById("week2NotYet").style.display = 'block';
         }
-        if (week3Count > 0) {
-            document.getElementById("week3").style.display = 'block';
+        if (winNo3.length == 0) {
+            document.getElementById("week3NotYet").style.display = 'block';
         }
-        if (week4Count > 0) {
-            document.getElementById("week4").style.display = 'block';
+        if (winNo4.length == 0) {
+            document.getElementById("week4NotYet").style.display = 'block';
         }
     }
 
@@ -276,7 +279,11 @@
         let week3Result = document.getElementById('week3Result');
         let week4Result = document.getElementById('week4Result');
 
-        document.getElementById('invalid').style.display='none';
+        document.getElementById("week1NotYet").style.display = 'none';
+        document.getElementById("week2NotYet").style.display = 'none';
+        document.getElementById("week3NotYet").style.display = 'none';
+        document.getElementById("week4NotYet").style.display = 'none';
+        document.getElementById('invalid').style.display = 'none';
         document.getElementById("week1").style.display = 'none';
         document.getElementById("week2").style.display = 'none';
         document.getElementById("week3").style.display = 'none';
@@ -288,6 +295,6 @@
         week4Result.innerHTML = '';
     }
 
-    function clearInvalid(){
-        document.getElementById('invalid').style.display='none';
+    function clearInvalid() {
+        document.getElementById('invalid').style.display = 'none';
     }

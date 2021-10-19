@@ -34,7 +34,11 @@
         ]
     }];
 
-    var winNo2 = [];
+    var winNo2 = [{
+        lotteryDate: '2021/10/19 (二)',
+        name: '國旅券',
+        number: ['87', '04', '40', '29', '71']
+    }];
 
     var winNo3 = [];
 

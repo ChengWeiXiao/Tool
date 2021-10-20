@@ -42,6 +42,10 @@
         lotteryDate: '2021/10/19 (二)',
         name: 'i原券',
         number: ['12', '59']
+    }, {
+        lotteryDate: '2021/10/20 (三)',
+        name: '農遊券',
+        number: ['50', '13']
     }];
 
     var winNo3 = [];
